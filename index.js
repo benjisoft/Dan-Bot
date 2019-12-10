@@ -8,10 +8,6 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-var config = new aws.S3({
-    token: process.env.token
-  });
-
 client.on('message', msg => {
   if (msg.content === '!mutedan') {
       if(danCount == 5) {
@@ -25,4 +21,4 @@ client.on('message', msg => {
   }
 });
 
-client.login(config.token);
+client.login(process.env.token);
