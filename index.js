@@ -1,12 +1,16 @@
 const Discord = require('discord.js');
+const aws = require('aws-sdk');
 const client = new Discord.Client();
-const config = require("./config.json");
 var danCount = 0;
 var camCount = 0;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
+
+let config = new aws.S3({
+    token: process.env.token
+  });
 
 client.on('message', msg => {
   if (msg.content === '!mutedan') {
