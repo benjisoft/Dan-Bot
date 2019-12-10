@@ -8,7 +8,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-let config = new aws.S3({
+var config = new aws.S3({
     token: process.env.token
   });
 
