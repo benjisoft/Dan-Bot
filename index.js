@@ -54,9 +54,10 @@ if (!msg.content.startsWith('!mutedan') || msg.author.bot) return;
     member.addRole(role).catch(console.error);
     // sleep(60000)
     // member.removeRole(role).catch(console.error);
-    setTimeout(() => {  member.removeRole(role).catch(console.error); }, 60000);
+    setTimeout(() => {  member.removeRole(role).catch(console.error); }, 60000)
     console.log(member + " muted cycle finished");
     danCount = 0;
+    //FIXME: Currently it does it once then wont work again, until a manual restart, fix that.
   }
   else {
     console.log("Mute triggered " + danCount);
@@ -64,9 +65,6 @@ if (!msg.content.startsWith('!mutedan') || msg.author.bot) return;
     msg.channel.send("Vote has been counted! Currently there are " + danCount + " votes. ")
   }
   });
-
-
-// TODO: add mute role to dan for 2 minutes then remove it.
 
 // Heroku Run
 // client.login(process.env.token);
