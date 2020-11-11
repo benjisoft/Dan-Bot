@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const aws = require('aws-sdk');
 const client = new Discord.Client();
 client.timeout = 130000
-var danCount = 0;
+var reqCount = 0;
 // var camCount = 0;
 
 // Added for local testing
@@ -17,6 +17,12 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
+function removeRole() {
+  // member.removeRole(arg).catch(console.error);
+  console.log('Test');
+}
+
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -25,34 +31,38 @@ client.on('ready', () => {
 client.on('message', msg => {
   if (!msg.content.startsWith('!mutedan') || msg.author.bot) return;
     global.args = msg.content.slice(8).trim();
-    let role = msg.guild.roles.find(r => r.name === "Muted");
     // msg.channel.send(args)
   
-    if(danCount == 1) {
+    if(reqCount == 1) {
       let member = msg.mentions.members.first();
       console.log(member + " muted cycle started");
-      member.addRole(role).catch(console.error);
+      member.roles.add('652102004654735380').catch(console.error);
       // FIXME: Currently it does it once then wont work again, until a manual restart, fix that.
       // TODO: maybe make the current time + 2 mins, then while time not equal to that keep going
-      var fullDate = new Date();
-      var minutes = fullDate.getMinutes();
-      var minutesPlusTwo = minutes + 2;
-      console.log(minutes)
-      console.log(minutesPlusTwo)
-      while (minutes != minutesPlusTwo) {
-          var fullDate = new Date();
-          var minutes = fullDate.getMinutes();
-      }
-      // setTimeout(() => {  member.removeRole(role).catch(console.error); }, 60000)
-      member.removeRole(role).catch(console.error);
+      // var fullDate = new Date();
+      // var minutes = fullDate.getMinutes();
+      // var minutesPlusTwo = minutes + 2;
+      // console.log(minutes)
+      // console.log(minutesPlusTwo)
+      // while (minutes != minutesPlusTwo) {
+      //     var fullDate = new Date();
+      //     var minutes = fullDate.getMinutes();
+      // }
+      setTimeout(function(){member.roles.remove('652102004654735380').catch(console.error)}, 60000, 'funky');
+      // setTimeout(removeRole(), 60000, 'funky')
+      // setTimeout(() => {  member.roles.remove('652102004654735380').catch(console.error); }, 60000)
+      // member.removeRole(role).catch(console.error);
       console.log(member + " muted cycle finished");
-      danCount = 0;
+      reqCount = 0;
+      // client.destroy().then(() => {
+      //   client.login(TOKEN);
+      // });      
 
     }
     else {
-      console.log("Mute triggered " + danCount);
-      danCount += 1;
-      msg.channel.send("Vote has been counted! Currently there are " + danCount + " votes. ")
+      console.log("Mute triggered " + reqCount);
+      reqCount += 1;
+      msg.channel.send("Vote has been counted! Currently there are " + reqCount + " votes. ")
     }
     });
 
