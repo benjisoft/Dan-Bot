@@ -31,36 +31,15 @@ client.on('ready', () => {
 client.on('message', msg => {
   if (!msg.content.startsWith('!mutedan') || msg.author.bot) return;
     global.args = msg.content.slice(8).trim();
-    // msg.channel.send(args)
   
     if(reqCount == 1) {
       let member = msg.mentions.members.first();
-      console.log(member + " muted cycle started");
       member.roles.add('652102004654735380').catch(console.error);
-      // FIXME: Currently it does it once then wont work again, until a manual restart, fix that.
-      // TODO: maybe make the current time + 2 mins, then while time not equal to that keep going
-      // var fullDate = new Date();
-      // var minutes = fullDate.getMinutes();
-      // var minutesPlusTwo = minutes + 2;
-      // console.log(minutes)
-      // console.log(minutesPlusTwo)
-      // while (minutes != minutesPlusTwo) {
-      //     var fullDate = new Date();
-      //     var minutes = fullDate.getMinutes();
-      // }
       setTimeout(function(){member.roles.remove('652102004654735380').catch(console.error)}, 60000, 'funky');
-      // setTimeout(removeRole(), 60000, 'funky')
-      // setTimeout(() => {  member.roles.remove('652102004654735380').catch(console.error); }, 60000)
-      // member.removeRole(role).catch(console.error);
-      console.log(member + " muted cycle finished");
       reqCount = 0;
-      // client.destroy().then(() => {
-      //   client.login(TOKEN);
-      // });      
-
     }
     else {
-      console.log("Mute triggered " + reqCount);
+      console.log("Mute voted " + reqCount);
       reqCount += 1;
       msg.channel.send("Vote has been counted! Currently there are " + reqCount + " votes. ")
     }
