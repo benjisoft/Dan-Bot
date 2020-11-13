@@ -3,25 +3,9 @@ const aws = require('aws-sdk');
 const client = new Discord.Client();
 client.timeout = 130000
 var reqCount = 0;
-// var camCount = 0;
 
 // Added for local testing
 require('dotenv').config()
-
-
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
-
-function removeRole() {
-  // member.removeRole(arg).catch(console.error);
-  console.log('Test');
-}
-
 
 
 client.on('ready', () => {
@@ -29,13 +13,14 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (!msg.content.startsWith('!mutedan') || msg.author.bot) return;
+  if (!msg.content.startsWith('!votemute') || msg.author.bot) return;
     global.args = msg.content.slice(8).trim();
   
-    if(reqCount == 1) {
+    if(reqCount == 4) {
       let member = msg.mentions.members.first();
       member.roles.add('652102004654735380').catch(console.error);
-      setTimeout(function(){member.roles.remove('652102004654735380').catch(console.error)}, 60000, 'funky');
+      setTimeout(function(){member.roles.remove('652102004654735380').catch(console.error)}, 120000, 'funky');
+      msg.channel.send(args + " has been muted")
       reqCount = 0;
     }
     else {
