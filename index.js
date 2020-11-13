@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const aws = require('aws-sdk');
 const client = new Discord.Client();
 client.timeout = 130000
-var reqCount = 0;
 var voteCounts = {};
 
 
@@ -17,8 +16,6 @@ client.on('ready', () => {
 client.on('message', msg => {
   if (!msg.content.startsWith('!testvotemute') || msg.author.bot) return;
     global.args = msg.content.slice(14).trim();
-
-    
 
     if(voteCounts[args] == 4) {
       let member = msg.mentions.members.first();
