@@ -17,7 +17,10 @@ client.on('message', msg => {
   if (!msg.content.startsWith('!votemute') || msg.author.bot) return;
     global.args = msg.content.slice(9).trim();
 
-    if(voteCounts[args] == 4) {
+    if(args == "") {
+        msg.channel.send("Please give someone to vote to mute.");
+    }
+    else if (voteCounts[args] == 4) {
       let member = msg.mentions.members.first();
       member.roles.add('652102004654735380').catch(console.error);
       setTimeout(function(){member.roles.remove('652102004654735380').catch(console.error)}, 120000, 'funky');
