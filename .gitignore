@@ -167,3 +167,7 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/node,macos,windows,java-web,visualstudiocode
 
 config.json
+config.json.example
+package-lock.json
+package.json
+node_modules
