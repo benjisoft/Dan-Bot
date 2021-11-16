@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/benjisoft/Dan-Bot#readme",
   "dependencies": {
-    "aws-sdk": "^2.586.0",
+    "aws-sdk": "^2.814.0",
     "discord.js": "^11.5.1"
   }
 }
